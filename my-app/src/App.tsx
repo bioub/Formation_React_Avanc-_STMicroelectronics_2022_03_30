@@ -2,7 +2,8 @@ import { Component } from 'react';
 import Button from './Button';
 import DemoRenderProps from './DemoRenderProps';
 import DemoRenderPropsWithComponent from './DemoRenderPropsWithComponent';
-import Select from './Select';
+import Hello, { HelloHideable } from './Hello';
+import Select, { SelectHideable } from './Select';
 import SelectItem from './SelectItem';
 import SelectRenderItemComp from './SelectRenderItemComp';
 
@@ -29,9 +30,9 @@ class App extends Component {
             selected={selected}
             onSelected={handleSelected}
             renderValue={<i>{selected}</i>}
-            renderItem={(item) => (item === selected) ? <b>{item}</b> : item}
+            renderItem={(item) => (item === selected ? <b>{item}</b> : item)}
           />
-           <SelectRenderItemComp
+          <SelectRenderItemComp
             items={['Toto', 'Titi', 'Tata']}
             selected={selected}
             onSelected={handleSelected}
@@ -62,6 +63,11 @@ class App extends Component {
         <Button>
           <b>Mon contenu</b>
         </Button>
+
+        <h2>Higher Order Component</h2>
+        <Hello />
+        <HelloHideable defaultShow={false} />
+        <SelectHideable defaultShow={false} items={['Toto', 'Titi', 'Tata']} selected={selected} onSelected={handleSelected} />
       </div>
     );
   }

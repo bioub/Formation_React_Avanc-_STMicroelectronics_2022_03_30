@@ -1,5 +1,6 @@
 import styles from './Select.module.css';
 import React, { Component, createRef, MouseEvent } from 'react';
+import { hideable } from './hocs/hideable';
 
 type Props = {
   items: string[];
@@ -59,5 +60,7 @@ class Select extends Component<Props, State> {
     );
   }
 }
+
+export const SelectHideable = hideable<any>(Select);
 
 export default Select;
