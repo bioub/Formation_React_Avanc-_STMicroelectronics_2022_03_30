@@ -1,14 +1,14 @@
 import { Component, ComponentType } from "react"; 
 
-interface InjectedProps {
+type HideableProps = {
   defaultShow?: boolean;
 }
 
-export function hideable<BaseProps>(WrappedComponent: ComponentType<BaseProps>) {
-  type HocProps = BaseProps & InjectedProps;
+export function hideable<BaseProps>(BaseComponent: ComponentType<BaseProps>) {
+  type HocProps = BaseProps & HideableProps;
 
   class EnhancedComponent extends Component<HocProps> {
-    static displayName = `hideable(${WrappedComponent.name})`;
+    static displayName = `hideable(${BaseComponent.name})`;
     state = {
       show: this.props.defaultShow,
     };
@@ -23,7 +23,7 @@ export function hideable<BaseProps>(WrappedComponent: ComponentType<BaseProps>) 
       const { show } = this.state;
       return (
         <div>
-          {show && <WrappedComponent {...wrappedProps as BaseProps} />}
+          {show && <BaseComponent {...wrappedProps as BaseProps} />}
           <button onClick={this.handleClick}>{show ? 'Off' : 'On'}</button>
         </div>
       );

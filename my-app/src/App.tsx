@@ -67,7 +67,12 @@ class App extends Component {
         <h2>Higher Order Component</h2>
         <Hello />
         <HelloHideable defaultShow={false} />
-        <SelectHideable defaultShow={false} items={['Toto', 'Titi', 'Tata']} selected={selected} onSelected={handleSelected} />
+        <SelectHideable
+          defaultShow={false}
+          items={['Toto', 'Titi', 'Tata']}
+          selected={selected}
+          onSelected={handleSelected}
+        />
       </div>
     );
   }
