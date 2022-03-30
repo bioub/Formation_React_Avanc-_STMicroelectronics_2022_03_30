@@ -10,5 +10,8 @@ function Hello() {
 }
 
 export const HelloHideable = hideable(Hello);
+// export const HelloBlue = color(Hello, 'blue');
+// export const HelloRed = color(Hello, 'red');
+// <HelloColor color="red" />
 
 export default Hello;

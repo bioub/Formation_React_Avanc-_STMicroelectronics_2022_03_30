@@ -4,8 +4,8 @@ interface InjectedProps {
   defaultShow?: boolean;
 }
 
-export function hideable<BaseProps extends InjectedProps>(WrappedComponent: ComponentType<BaseProps>) {
-  type HocProps = any;
+export function hideable<BaseProps>(WrappedComponent: ComponentType<BaseProps>) {
+  type HocProps = BaseProps & InjectedProps;
 
   class EnhancedComponent extends Component<HocProps> {
     static displayName = `hideable(${WrappedComponent.name})`;

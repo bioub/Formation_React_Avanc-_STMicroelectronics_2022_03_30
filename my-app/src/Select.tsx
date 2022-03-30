@@ -61,6 +61,6 @@ class Select extends Component<Props, State> {
   }
 }
 
-export const SelectHideable = hideable<any>(Select);
+export const SelectHideable = hideable<Props>(Select);
 
 export default Select;
