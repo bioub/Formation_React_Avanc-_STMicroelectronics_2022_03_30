@@ -1,19 +1,24 @@
 import styles from './Select.module.css';
 import React, { Component, createRef, MouseEvent } from 'react';
 
+export type ItemProps = {
+  item: string;
+  onClick(): void;
+}
+
 type Props = {
   items: string[];
   selected: string;
   onSelected(selected: string): void;
   renderValue?: JSX.Element;
-  renderItem?(item: string): JSX.Element | string;
+  componentItem: React.ComponentType<ItemProps>;
 };
 
 type State = {
   readonly open: boolean;
 };
 
-class Select extends Component<Props, State> {
+class SelectRenderItemComp extends Component<Props, State> {
   readonly state: State = {
     open: false,
   };
@@ -33,7 +38,7 @@ class Select extends Component<Props, State> {
   }
 
   render() {
-    const { items, selected, onSelected, renderValue, renderItem } = this.props;
+    const { items, selected, onSelected, renderValue, componentItem: Item } = this.props;
     const { open } = this.state;
 
     const handleClick = (event: MouseEvent<HTMLDivElement>) => {
@@ -46,12 +51,13 @@ class Select extends Component<Props, State> {
     };
 
     return (
-      <div className="Select" onClick={handleClick} ref={this.hostRef}>
+      <div className="SelectRenderItemComp" onClick={handleClick} ref={this.hostRef}>
         <div className={styles.value}>{renderValue ? renderValue : selected}</div>
         {open && (
           <div className={styles.menu}>
             {items.map((item) => (
-              <div key={item} onClick={() => onSelected(item)}>{renderItem ? renderItem(item) : item}</div>
+              <Item key={item} item={item} onClick={() => onSelected(item)} />
+              // <div key={item} onClick={() => onSelected(item)}>{renderItem ? renderItem(item) : item}</div>
             ))}
           </div>
         )}
@@ -60,4 +66,4 @@ class Select extends Component<Props, State> {
   }
 }
 
-export default Select;
+export default SelectRenderItemComp;

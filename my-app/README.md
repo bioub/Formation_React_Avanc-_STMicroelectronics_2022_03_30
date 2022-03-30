@@ -18,3 +18,28 @@ de balise `<b>` (dans les 2 cas conserver les div existantes pour ne pas perdre 
 Faire ensuite évoluer `renderItem` pour que l'item ne soit en gras que s'il correspond à la valeur sélectionnée.
 
 Bonus : faire évoluer le code de renderItem vers un composant de telle sorte à ce que dans `Select` on puisse utiliser : `<Item key={item} onClick={() => onSelected(item)}>{item}</Item>`
+
+## Higher Order Component
+
+Créer un Higher Order Component component nommé `color`
+
+Ce Higher Order Component reçoit en paramètres le composant à encapsuler et une couleur au format CSS (ex : `blue`, `#0000FF`, `rgb(0, 0, 255)`)
+
+Dans le render du Higher Order Component, créer une balise div comme ceci :
+
+```
+return (
+  <div style={{color: color}}>
+    <WrappedComponent />
+  </div>
+);
+```
+
+(`WrappedComponent` étant le premier paramètre du HOC)
+
+Penser à passer les props du HOC à `WrappedComponent`
+
+Générer ensuite un composant `BlueSelect` à partir du HOC `color` et l'utiliser dans 
+`App`
+
+Bonus : faire évoluer le code pour que la couleur ne soit plus un paramètre du HOC mais qu'elle vienne des props.
