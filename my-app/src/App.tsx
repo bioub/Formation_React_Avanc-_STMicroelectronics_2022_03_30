@@ -1,26 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Component } from 'react';
+import Button from './Button';
+import DemoRenderProps from './DemoRenderProps';
+import DemoRenderPropsWithComponent from './DemoRenderPropsWithComponent';
+import Select from './Select';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+class App extends Component {
+  state = {
+    selected: 'Titi',
+  };
+  render() {
+    const { selected } = this.state;
+
+    const handleSelected = (selected: string) => {
+      this.setState({
+        selected,
+      });
+    };
+
+    return (
+      <div className="App" onClick={() => console.log('App click')}>
+        <div>
+          {/* React.createElement(Select, {items: [], selected: ''}) */}
+          Prénom : <Select items={['Toto', 'Titi', 'Tata']} selected={selected} onSelected={handleSelected} />
+        </div>
+        <div>Prénom sélectionné : {selected}</div>
+
+        <h2>event.preventDefault()</h2>
+        <a href="https://www.google.fr/" onClick={(event) => event.preventDefault()}>
+          Google
         </a>
-      </header>
-    </div>
-  );
+        <input
+          type="text"
+          onBeforeInput={(event: any) => {
+            if (isNaN(Number(event.nativeEvent.data))) {
+              event.preventDefault();
+            }
+          }}
+        />
+
+        <h2>Render Props</h2>
+        <DemoRenderProps renderTitle={(title) => <h1>{title}</h1>} renderContent={(content) => <b>{content}</b>} />
+      
+        <DemoRenderPropsWithComponent renderTitle={MyTitle}/>
+
+        <Button>
+          <b>Mon contenu</b>
+        </Button>
+      </div>
+    );
+  }
+}
+
+function MyTitle(props: any) {
+  return <h3>{props.title}</h3>
 }
 
 export default App;
