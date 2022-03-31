@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 type Props = {
   name?: string;
 }
 
 function Hello({name}: Props) {
+
   return (
     <div className="Hello">
       Hello {name}

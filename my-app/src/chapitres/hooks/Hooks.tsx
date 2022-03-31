@@ -1,29 +1,20 @@
-import React, { Component } from 'react';
-import Select from './Select';
-import Hello from './Hello';
+import React, { useContext } from 'react';
 import Clock from './Clock';
+import Hello from './Hello';
+import { NameContext } from './NameContext';
+import Select from './Select';
 
-class Hooks extends Component {
-  state = {
-    selected: 'Titi',
-  };
-  render() {
-    const { selected } = this.state;
+function Hooks() {
+  const { name, setName } = useContext(NameContext);
 
-    const handleSelected = (selected: string) => {
-      this.setState({
-        selected,
-      });
-    };
-    return (
-      <div className="Hooks">
-        <h2>Hooks</h2>
-        <Clock />
-        <Select items={['Toto', 'Titi', 'Tata']} selected={selected} onSelected={handleSelected} />
-        <Hello name={selected} />
-      </div>
-    );
-  }
+  return (
+    <div className="Hooks">
+      <h2>Hooks</h2>
+      <Clock />
+      <Select items={['Toto', 'Titi', 'Tata']} selected={name} onSelected={setName} />
+      <Hello name={name} />
+    </div>
+  );
 }
 
 export default Hooks;
