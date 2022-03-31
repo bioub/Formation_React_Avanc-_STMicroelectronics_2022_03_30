@@ -1,17 +1,20 @@
 import React from 'react';
+import { color } from './hocs/color';
 import { hideable } from './hocs/hideable';
 
-function Hello() {
+type Props = {
+  name?: string;
+}
+
+function Hello({name}: Props) {
   return (
     <div className="Hello">
-      Hello Component
+      Hello {name}
     </div>
   );
 }
 
 export const HelloHideable = hideable(Hello);
-// export const HelloBlue = color(Hello, 'blue');
-// export const HelloRed = color(Hello, 'red');
-// <HelloColor color="red" />
+export const HelloColor = color(Hello);
 
 export default Hello;

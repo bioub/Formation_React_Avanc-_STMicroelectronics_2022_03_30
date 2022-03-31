@@ -1,85 +1,32 @@
 import { Component } from 'react';
-import Button from './Button';
-import DemoRenderProps from './DemoRenderProps';
-import DemoRenderPropsWithComponent from './DemoRenderPropsWithComponent';
-import Hello, { HelloHideable } from './Hello';
-import Select, { SelectHideable } from './Select';
-import SelectItem from './SelectItem';
-import SelectRenderItemComp from './SelectRenderItemComp';
+import { Link, Route, Routes } from 'react-router-dom';
+import HigherOrderComponents from './chapitres/higher-order-components/HigherOrderComponents';
+import Hooks from './chapitres/hooks/Hooks';
+import Rappels from './chapitres/rappels/Rappels';
+import RenderProps from './chapitres/render-props/RenderProps';
 
 class App extends Component {
-  state = {
-    selected: 'Titi',
-  };
   render() {
-    const { selected } = this.state;
-
-    const handleSelected = (selected: string) => {
-      this.setState({
-        selected,
-      });
-    };
-
     return (
-      <div className="App" onClick={() => console.log('App click')}>
-        <div>
-          {/* React.createElement(Select, {items: [], selected: ''}) */}
-          Prénom :{' '}
-          <Select
-            items={['Toto', 'Titi', 'Tata']}
-            selected={selected}
-            onSelected={handleSelected}
-            renderValue={<i>{selected}</i>}
-            renderItem={(item) => (item === selected ? <b>{item}</b> : item)}
-          />
-          <SelectRenderItemComp
-            items={['Toto', 'Titi', 'Tata']}
-            selected={selected}
-            onSelected={handleSelected}
-            renderValue={<i>{selected}</i>}
-            componentItem={SelectItem}
-          />
-        </div>
-        <div>Prénom sélectionné : {selected}</div>
-
-        <h2>event.preventDefault()</h2>
-        <a href="https://www.google.fr/" onClick={(event) => event.preventDefault()}>
-          Google
-        </a>
-        <input
-          type="text"
-          onBeforeInput={(event: any) => {
-            if (isNaN(Number(event.nativeEvent.data))) {
-              event.preventDefault();
-            }
-          }}
-        />
-
-        <h2>Render Props</h2>
-        <DemoRenderProps renderTitle={(title) => <h1>{title}</h1>} renderContent={(content) => <b>{content}</b>} />
-
-        <DemoRenderPropsWithComponent renderTitle={MyTitle} />
-
-        <Button>
-          <b>Mon contenu</b>
-        </Button>
-
-        <h2>Higher Order Component</h2>
-        <Hello />
-        <HelloHideable defaultShow={false} />
-        <SelectHideable
-          defaultShow={false}
-          items={['Toto', 'Titi', 'Tata']}
-          selected={selected}
-          onSelected={handleSelected}
-        />
+      <div className="App">
+        <nav>
+          <Link to="/">Rappels</Link>
+          <Link to="/render-props">Render Props</Link>
+          <Link to="/hocs">Higher Order Components</Link>
+          <Link to="/hooks">Hooks</Link>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Rappels />} />
+          <Route path="render-props" element={<RenderProps />} />
+          <Route path="hocs" element={<HigherOrderComponents />} />
+          <Route path="hooks" element={<Hooks />} />
+        </Routes>
+        
       </div>
     );
   }
 }
 
-function MyTitle(props: any) {
-  return <h3>{props.title}</h3>;
-}
+
 
 export default App;

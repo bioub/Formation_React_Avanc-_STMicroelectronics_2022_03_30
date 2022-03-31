@@ -10,7 +10,7 @@ export function hideable<BaseProps>(BaseComponent: ComponentType<BaseProps>) {
   class EnhancedComponent extends Component<HocProps> {
     static displayName = `hideable(${BaseComponent.name})`;
     state = {
-      show: this.props.defaultShow,
+      show: this.props.defaultShow ?? false,
     };
     handleClick = () => {
       const { show } = this.state;

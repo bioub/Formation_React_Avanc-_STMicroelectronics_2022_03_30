@@ -1,13 +1,12 @@
 import styles from './Select.module.css';
 import React, { Component, createRef, MouseEvent } from 'react';
 import { hideable } from './hocs/hideable';
+import { color } from './hocs/color';
 
 type Props = {
   items: string[];
   selected: string;
   onSelected(selected: string): void;
-  renderValue?: JSX.Element;
-  renderItem?(item: string): JSX.Element | string;
 };
 
 type State = {
@@ -26,7 +25,7 @@ class Select extends Component<Props, State> {
       if (this.hostRef.current?.contains(event.target as Node)) {
         return;
       }
-      
+
       this.setState({
         open: false,
       });
@@ -34,13 +33,10 @@ class Select extends Component<Props, State> {
   }
 
   render() {
-    const { items, selected, onSelected, renderValue, renderItem } = this.props;
+    const { items, selected, onSelected } = this.props;
     const { open } = this.state;
 
     const handleClick = (event: MouseEvent<HTMLDivElement>) => {
-      // console.log(event.target.title);
-      // console.log(event.currentTarget.title);
-      // event.stopPropagation();
       this.setState({
         open: !open,
       });
@@ -48,11 +44,13 @@ class Select extends Component<Props, State> {
 
     return (
       <div className="Select" onClick={handleClick} ref={this.hostRef}>
-        <div className={styles.value}>{renderValue ? renderValue : selected}</div>
+        <div className={styles.value}>{selected}</div>
         {open && (
           <div className={styles.menu}>
             {items.map((item) => (
-              <div key={item} onClick={() => onSelected(item)}>{renderItem ? renderItem(item) : item}</div>
+              <div key={item} onClick={() => onSelected(item)}>
+                {item}
+              </div>
             ))}
           </div>
         )}
@@ -62,5 +60,6 @@ class Select extends Component<Props, State> {
 }
 
 export const SelectHideable = hideable(Select);
+export const SelectColor = color(Select);
 
 export default Select;
