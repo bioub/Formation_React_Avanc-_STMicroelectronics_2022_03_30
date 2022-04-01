@@ -49,6 +49,10 @@ class RenderProps extends Component {
         <Hideable>
           <Hello />
         </Hideable>
+
+        {/* <Color color="blue">
+          <Hello />
+        </Color> */}
       </div>
     );
   }

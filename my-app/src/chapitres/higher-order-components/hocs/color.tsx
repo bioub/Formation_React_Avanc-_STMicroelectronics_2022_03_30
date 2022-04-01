@@ -15,5 +15,7 @@ export function color<BaseProps>(BaseComponent: ComponentType<BaseProps>) {
     );
   }
 
+  EnhancedComponent.displayName = `color(${BaseComponent.displayName ?? BaseComponent.name})`
+
   return EnhancedComponent;
 }

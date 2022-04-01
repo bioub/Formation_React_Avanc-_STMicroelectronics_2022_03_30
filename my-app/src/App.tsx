@@ -16,6 +16,7 @@ class App extends Component {
           <Link to="/hocs">Higher Order Components</Link>
           <Link to="/hooks">Hooks</Link>
         </nav>
+        {/* React.createElement(ErrorBoundary, {}, ...) */}
         <ErrorBoundary>
           <Routes>
             <Route path="/" element={<Rappels />} />
