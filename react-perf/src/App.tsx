@@ -1,6 +1,7 @@
 import Hello from './Hello';
 import Clock from './Clock';
 import Todos from './todos/Todos';
+import ClockWithControls from './ClockWithControls';
 
 function App() {
   console.log('App renders');
@@ -8,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <Hello />
-      {/* <Clock /> */}
+      <ClockWithControls />
       <Todos />
     </div>
   );

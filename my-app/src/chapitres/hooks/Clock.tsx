@@ -47,6 +47,8 @@ import React, { Component, useEffect, useRef, useState } from 'react';
 // équivalent à
 // const [now, setNow] = useState(new Date());
 
+
+
 function Clock() {
   const [running, setRunning] = useState(true);
   const [now, setNow] = useState(new Date()); // l'élément 1 du tableau
